@@ -16,4 +16,19 @@ int main() {
     //     For each i, move forward by n elements to reach the paired ASCII code in the second half of codeArray.
     //     Convert that ASCII value to a character and print it.
 
+    for ( int i = 0; i < n; i++) {
+        int rank = codeArray[i];
+        pointerArray[rank - 1] = &codeArray[i]; // <= 포인터 자체의 값(주소)를 변경하는 코드, 포인터가 codeArray[i]의 주소를 가리키도록 하는 것
+                                                // *pointerArray[rank - 1] = &codeArray[i]; => 정수형 변수에 주소값을 대입하려고 하는 것 => 오류
+    }                                           // pointerArray[i] -> int*형 포인터 변수
+                                                // codeArray[i] → int형 값
+                                                //  &codeArray[i] → int*형 주소값
+    for (int i = 0; i < n; i++) {
+        int value = *(pointerArray[i] + n); // 포인터 + 정수 연산 가능, 포인터 + 포인터 => 오류
+        std::cout << static_cast<char>(value); // std::endl은 단순히 \n처럼 줄바꿈을 넣는다. + 버퍼 비운다.
+    }
+
+    return 0;
+
+
 }
